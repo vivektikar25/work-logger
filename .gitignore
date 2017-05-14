@@ -1,0 +1,2 @@
+virt_work_logger/*
+backend/work_logger_mainapp/db.sqlite3
