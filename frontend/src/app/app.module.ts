@@ -18,6 +18,8 @@ import { MaterialModule } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { JiraService } from './core/jira/jira.service';
 import { JiraDataService } from './core/jira/jira-data.service';
+import { WorkLogService } from './core/work-log/work-log.service';
+import { WorkLogDataService } from './core/work-log/work-log-data.service';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,10 @@ import { JiraDataService } from './core/jira/jira-data.service';
     LoginSignupDataService,
     JiraService,
     JiraDataService,
+    WorkLogService,
+    WorkLogDataService,
     ToasterServiceService,
-    HttpInterceptorService,
+    HttpInterceptorService
   ],
   bootstrap: [AppComponent]
 })

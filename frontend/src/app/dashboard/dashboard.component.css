@@ -112,3 +112,11 @@
 .warning-icon {
     color: rgba(255, 255, 0, 0.8);
 }
+
+.summary {
+    border: 2px solid #E0E0E0;
+    border-radius: 5px;
+    height: 100px;
+    overflow: auto;
+    background-color: #fff;
+}

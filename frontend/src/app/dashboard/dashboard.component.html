@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12" style="margin-top: 20px;">
   <div class="col-md-3">
     <div>
       <h4>Assignee</h4>
@@ -31,28 +31,57 @@
     <button (click)="getJiraTickets()" class="btn btn-primary">Search</button>
   </div>
 </div>
-<div class="col-md-12">
+<div class="col-md-12" style="margin-top: 30px;">
     <div class="col-md-12">
         <md-card class="md-card">
-            <md-grid-list cols="4" rowHeight="280px">
+            <md-grid-list cols="4" rowHeight="200px">
                 <md-grid-tile [colspan]="1" [rowspan]="2">
                     <div class="movies-list">
-                        <md-card *ngFor="let movie of tickets; let even=even;" class="item-list">
+                        <md-card *ngFor="let ticket of tickets; let even=even;" on-mouseover="selectTicket(ticket)" class="item-list">
                             <h4 md-line>
-                                <span [class.highlight-title]="true">{{movie.ticket_number}}</span>
-                                <span title="Unsaved Changes" class="glyphicon glyphicon-info-sign warning-icon"></span>
+                                <span [class.highlight-title]="selectedTicket.ticket_number == ticket.ticket_number">{{ticket.ticket_number}}</span>
                             </h4>
                         </md-card>
                     </div>
                 </md-grid-tile>
                 <md-grid-tile [colspan]="3" [rowspan]="2">
-                    <div class="detail-pane">
+                    <div class="detail-pane" style="padding-top:40px;">
                         <div class="col-md-12">
-                            <div class="col-md-9 row">
-                                <div>
-                                  data
-                                </div>
+                          <div class="col-md-12 row">
+                            <div class="col-md-12 movie-overview">
+                              <span class="overview-title"><b>Summary:</b></span>
+                              <div class="summary">
+                                <div style="padding: 10px 10px;">{{selectedTicket?.summary}}</div>
+                              </div>
                             </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="col-md-12 row">
+                            <div class="col-md-12">
+                              <span class="overview-title"><b>Comment:</b></span>
+                            </div>
+                            <div class="col-md-12">
+                              <textarea rows="4" style="width:100%;" class="form-control" [(ngModel)]="comment"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="col-md-12 row">
+                            <div class="col-md-12">
+                              <span class="overview-title"><b>Time Spent:</b></span>
+                            </div>
+                            <div class="col-md-12">
+                              <input style="width:40%;" class="form-control" [(ngModel)]="timespent"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="col-md-12 row">
+                            <div class="col-md-12" style="margin-top:10px;">
+                              <button class="btn btn-primary" (click)="addWorkLog()">Add Work Log</button>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </md-grid-tile>

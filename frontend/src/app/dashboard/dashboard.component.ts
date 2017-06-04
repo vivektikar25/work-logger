@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JiraService } from './../core/jira/jira.service';
+import { WorkLogService } from './../core/work-log/work-log.service';
+import { ToasterServiceService } from './../core/api/toaster-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +16,14 @@ export class DashboardComponent implements OnInit {
   projects: string[];
   selectedProjects: string[];
   assignee: string;
+  selectedTicket = {};
+  comment: string;
+  timespent: string;
 
   constructor(
-    private jiraService: JiraService
+    private jiraService: JiraService,
+    private workLogService: WorkLogService,
+    private toasterServiceService: ToasterServiceService
   ) { }
 
   ngOnInit() {
@@ -28,7 +35,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getJiraTickets = () => {
-    this.selectedProjects.push("");
     console.log("selectedProjects are", typeof(this.selectedProjects));
     const payload = {
       "assignee": this.assignee,
@@ -39,6 +45,7 @@ export class DashboardComponent implements OnInit {
       data => {
         console.log("data is", data);
         this.tickets = data;
+        this.selectedTicket = this.tickets[0];
       },
       err => {
         
@@ -46,6 +53,28 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  selectTicket = (ticket) => {
+    this.selectedTicket = ticket;
+  }
 
+  addWorkLog = () => {
+    const payload = {
+      "jira_ticket": this.selectedTicket["ticket_number"],
+      "comment": this.comment,
+      "time_spent": this.timespent
+    }
 
+    this.workLogService.addWorkLog(payload).subscribe(
+      data => {
+        if(data.save_work_log_status){
+          this.toasterServiceService.showToaster("success", "Add Work Log", data.message);
+        }else{
+          this.toasterServiceService.showToaster("warning", "Add Work Log", data.message);
+        }
+      },
+      err => {
+        this.toasterServiceService.showToaster("warning", "Add Work Log", "Failed to save work log");
+      }
+    );
+  }
 }
