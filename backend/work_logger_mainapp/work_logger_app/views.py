@@ -27,10 +27,10 @@ class JiraApiView(APIView):
         jira_credentilas = getDataModel.getJiraCredentials(user_id)
 
         authed_jira = JIRA(jira_options, basic_auth=(jira_credentilas["users_jira_login"], jira_credentilas["users_jira_password"]))
-
         project_tuple_list = [str(x) for x in project_list]
+        project_tuple_list = "(" + ",".join(str(item) for item in project_tuple_list) + ")"
         jql_query = jql_query.replace("{assignee}", assignee)
-        jql_query = jql_query.replace("{project_list}", str(tuple(project_tuple_list)))
+        jql_query = jql_query.replace("{project_list}", project_tuple_list)
 
         users_tickets = authed_jira.search_issues(jql_query, maxResults=max_ticket_limit)
 

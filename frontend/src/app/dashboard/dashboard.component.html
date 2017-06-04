@@ -1,12 +1,45 @@
 <div class="col-md-12">
-    <div  class="col-md-12" class="detail-view">
+  <div class="col-md-3">
+    <div>
+      <h4>Assignee</h4>
+    </div>
+    <div>
+      <input [(ngModel)]="assignee" class="form-control" placeholder="assignee"/>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div>
+      <h4>Max Tickets</h4>
+    </div>
+    <div>
+      <select [(ngModel)]="maxTickets" class="form-control">
+        <option *ngFor="let number of numberOfTickets" [value]="number">{{number}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div>
+      <h4>Projects</h4>
+    </div>
+    <div>
+      <ngx-multiselect [(ngModel)]="selectedProjects" [options]="projects" [multiple]="true"></ngx-multiselect>
+    </div>
+  </div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div class="col-md-3">
+    <button (click)="getJiraTickets()" class="btn btn-primary">Search</button>
+  </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-12">
         <md-card class="md-card">
             <md-grid-list cols="4" rowHeight="280px">
                 <md-grid-tile [colspan]="1" [rowspan]="2">
                     <div class="movies-list">
-                        <md-card *ngFor="let movie of [1,2,3]; let even=even;" class="item-list">
+                        <md-card *ngFor="let movie of tickets; let even=even;" class="item-list">
                             <h4 md-line>
-                                <span [class.highlight-title]="true">{{movie.title}}</span>
+                                <span [class.highlight-title]="true">{{movie.ticket_number}}</span>
                                 <span title="Unsaved Changes" class="glyphicon glyphicon-info-sign warning-icon"></span>
                             </h4>
                         </md-card>

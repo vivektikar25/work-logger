@@ -16,7 +16,7 @@ export class HttpInterceptorService extends Http {
   request(url: Request | string , options?: RequestOptionsArgs): Observable<Response> { //url is object and not string
     let authToken = "";
     const baseUrl = environment.baseUrl;
-    authToken = localStorage.getItem(authToken);
+    authToken = localStorage.getItem("authToken");
     if (typeof url === 'string') {
       url = `${baseUrl}${url}`; 
       if (!options) {
