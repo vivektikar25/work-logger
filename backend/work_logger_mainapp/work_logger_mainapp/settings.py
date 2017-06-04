@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'work_logger_app.apps.WorkLoggerAppConfig',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -48,6 +49,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'work_logger_mainapp.urls'
@@ -105,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+CORS_ORIGIN_ALLOW_ALL = True
 
 TIME_ZONE =  'Asia/Kolkata'
 

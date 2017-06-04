@@ -1,0 +1,25 @@
+<div style="height:100%;">
+<div class="col-md-6 col-md-offset-3" style="    background-color: rgba(193, 193, 193, 0.62);border-radius: 1%;height: 345px;">
+    <div>
+        <div class="form-group" style="color: grey;">
+            <h3>Username</h3>
+            <input type="text" class="form-control" [(ngModel)]="email" required />
+            
+        </div>
+        <div class="form-group" style="color: grey;">
+            <h3 for="password">Password</h3>
+            <input type="password" class="form-control" [(ngModel)]="password" required />
+        </div>
+        <div class="form-group" style="color: grey;">
+            <h3 for="password">Team</h3>
+            <select [(ngModel)]="selectedTeam" class="form-control">
+              <option *ngFor="let team of teams" [value]="team">{{team}}</option>
+            </select>
+        </div>
+        <div class="form-actions">
+            <button (click)="signup()" class="btn btn-primary">Signup</button>
+            <a routerLink="/login" class="btn btn-link">Login</a>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,138 @@
+<div class="col-md-12">
+    <div  class="col-md-12" class="detail-view">
+        <md-card class="md-card">
+            <md-grid-list cols="4" rowHeight="280px">
+                <md-grid-tile [colspan]="1" [rowspan]="2">
+                    <div class="movies-list">
+                        <md-card *ngFor="let movie of [1,2,3]; let even=even;" class="item-list">
+                            <h4 md-line>
+                                <span [class.highlight-title]="true">{{movie.title}}</span>
+                                <span title="Unsaved Changes" class="glyphicon glyphicon-info-sign warning-icon"></span>
+                            </h4>
+                        </md-card>
+                    </div>
+                </md-grid-tile>
+                <md-grid-tile [colspan]="3" [rowspan]="2">
+                    <div class="detail-pane">
+                        <div class="col-md-12">
+                            <div class="col-md-9 row">
+                                <div>
+                                  data
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-card>
+    </div>
+</div>
+
+
+<!--<div class="detail-background">
+    <div class="col-md-12 row">
+      <div class="col-md-6">
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Title</b>
+              </div>
+              <div class="text-overflow-dot">
+                <span [title]="selectedMovieDetail?.title">{{selectedMovieDetail?.title}}</span>
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Popularity</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.popularity}}
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Vote Count</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.vote_count}}
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Video</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.video}}
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Release Date</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.release_date}}
+              </div>
+            </div>
+        </md-card>
+      </div>
+      <div class="col-md-6">
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Orignal Title</b>
+              </div>
+              <div class="text-overflow-dot">
+                 <span [title]="selectedMovieDetail?.original_title">{{selectedMovieDetail?.original_title}}</span>
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Orignal Language</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.original_language}}
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Vote Average</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.vote_average}}
+              </div>
+            </div>
+        </md-card>
+        <md-card class="card">
+            <div>
+              <div>
+                <b>Adult</b>
+              </div>
+              <div class="text-overflow-dot">
+                {{selectedMovieDetail?.adult}}
+              </div>
+            </div>
+        </md-card>
+      </div>
+      <div class="col-md-12 movie-overview">
+           <md-card class="overview-card">
+              <span class="overview-title"><b>Overview:</b></span>
+              <div>{{selectedMovieDetail?.overview}}</div>
+           </md-card>
+      </div>
+      <div class="col-md-12 edit-button">
+          <button type="button" class="btn btn-primary" (click)="editMovie(selectedMovieDetail?.id)">Edit</button>
+      </div>
+    </div>
+</div>-->
