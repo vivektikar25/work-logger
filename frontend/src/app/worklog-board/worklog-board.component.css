@@ -1,0 +1,122 @@
+.movie-detail-values {
+    color: rgba(39, 39, 144, 0.85); 
+}
+
+.movie-overview {
+    height: 130px;
+}
+
+.card-input {
+    color: rgba(39, 39, 144, 0.85);
+    font-size: initial;
+    width: 100%;
+    font-size: 15px;margin-top: -15px;
+}
+
+.card {
+    height: 60px;    
+    background-color:rgba(141, 130, 195, 0.31);
+    margin-bottom: 4px;
+}
+
+.text-overflow-dot {
+    display: inline-block;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.overview-card{
+    background-color: rgba(141, 130, 195, 0.31);
+    margin-top: 15px;
+    width: 150%;
+}
+
+.edit-button {
+    margin-top: 40px;
+}
+
+.overview-title {
+    color: rgba(39, 39, 144, 0.85);
+}
+
+.card > div {
+    margin-top:-10px;
+}
+
+.card > div > div {
+    color: rgba(39, 39, 144, 0.85);
+    
+}
+
+.detail-background {
+    margin-top:21px;
+}
+
+.back-button {
+    margin:20px;
+}
+.detail-view {
+    margin:20px 0px;
+    margin-top:60px;
+}
+
+.movie-title {
+    border:solid grey 2px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 574px;
+    overflow: auto;
+    background-color: rgba(154, 142, 142, 0.32);
+}
+
+
+.poster-image {
+    padding: 20px;
+    width: 255px;
+
+}
+
+.highlight-title{
+    color: rgba(39, 39, 144, 0.85);
+    font-size: 18px;
+}
+
+.item-list {
+    cursor: pointer;
+    font-family: fantasy;
+}
+
+.md-card{
+    padding: 0px;
+}
+
+.movies-list {
+    height: 100%;
+    width: 100%;
+    overflow:auto;
+    background-color: #D0C8F5
+}
+
+.detail-pane {
+    background-color:#D0C8F5;
+    height: 100%;
+    width: 100%;
+}
+
+.detail-background {
+    background-color: rgba(171, 156, 247, 0.24);
+}
+
+.warning-icon {
+    color: rgba(255, 255, 0, 0.8);
+}
+
+.summary {
+    border: 2px solid #E0E0E0;
+    border-radius: 5px;
+    height: 100px;
+    overflow: auto;
+    background-color: #fff;
+}

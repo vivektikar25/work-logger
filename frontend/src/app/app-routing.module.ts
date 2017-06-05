@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { WorkLogComponent } from './work-log/work-log.component';
+import { WorklogBoardComponent } from './worklog-board/worklog-board.component';
 
 const routes = [
     {
@@ -19,8 +19,12 @@ const routes = [
       component: DashboardComponent
     },
     {
+      path: 'worklog',
+      component: WorklogBoardComponent
+    },
+    {
       path: '',
-      redirectTo: "/dashboard",
+      redirectTo: "/worklog",
       pathMatch: "full"
     }
 ]

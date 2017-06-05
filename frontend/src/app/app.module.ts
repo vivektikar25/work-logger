@@ -20,13 +20,15 @@ import { JiraService } from './core/jira/jira.service';
 import { JiraDataService } from './core/jira/jira-data.service';
 import { WorkLogService } from './core/work-log/work-log.service';
 import { WorkLogDataService } from './core/work-log/work-log-data.service';
+import { WorklogBoardComponent } from './worklog-board/worklog-board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignUpComponent,
-    DashboardComponent
+    DashboardComponent,
+    WorklogBoardComponent
   ],
   imports: [
     BrowserModule,

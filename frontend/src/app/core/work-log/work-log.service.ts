@@ -11,4 +11,8 @@ export class WorkLogService {
   addWorkLog = (payload) => {
     return this.workLogDataService.addWorkLog(payload);
   }
+
+  getUsersWorkLogs = () => {
+    return this.workLogDataService.getUsersWorkLogs();
+  }
 }
