@@ -1,12 +1,12 @@
-<div class="col-md-12" style="margin-top: 30px;">
+<div class="col-md-12" style="margin-top: 30px;" *ngIf="workLogs">
     <div class="col-md-12">
         <md-card class="md-card">
             <md-grid-list cols="4" rowHeight="200px">
                 <md-grid-tile [colspan]="1" [rowspan]="2">
                     <div class="movies-list">
-                        <md-card *ngFor="let ticket of tickets; let even=even;" on-mouseover="selectTicket(ticket)" class="item-list">
+                        <md-card *ngFor="let workLog of workLogs" (click)="getWorkLogDetails(workLog)" class="item-list">
                             <h4 md-line>
-                                <span [class.highlight-title]="selectedTicket.ticket_number == ticket.ticket_number">{{ticket.ticket_number}}</span>
+                                <span [class.highlight-title]="1">{{workLog.fields.jira_ticket}}</span>
                             </h4>
                         </md-card>
                     </div>
@@ -16,20 +16,10 @@
                         <div class="col-md-12">
                           <div class="col-md-12 row">
                             <div class="col-md-12 movie-overview">
-                              <span class="overview-title"><b>Summary:</b></span>
-                              <div class="summary">
-                                <div style="padding: 10px 10px;">{{selectedTicket?.summary}}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="col-md-12 row">
-                            <div class="col-md-12">
                               <span class="overview-title"><b>Comment:</b></span>
-                            </div>
-                            <div class="col-md-12">
-                              <textarea rows="4" style="width:100%;" class="form-control" [(ngModel)]="comment"></textarea>
+                              <div class="summary">
+                                <div style="padding: 10px 10px;">{{selectedWorkLog.fields.comment}}</div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -39,7 +29,39 @@
                               <span class="overview-title"><b>Time Spent:</b></span>
                             </div>
                             <div class="col-md-12">
-                              <input style="width:40%;" class="form-control" [(ngModel)]="timespent"/>
+                              <input style="width:40%;" class="form-control" disabled [value]="selectedWorkLog.fields.time_spent"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12" style="margin-top:15px;">
+                          <div class="col-md-6">
+                            <div class="col-md-12 row">
+                              <div class="col-md-6 row">
+                                <span class="overview-title"><b>Pushed To Jira</b></span>
+                              </div>
+                              <div class="col-md-6 row">
+                                <input type="checkbox" class="checkbox" disabled [checked]="selectedWorkLog.fields.push_to_jira"/>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="col-md-12 row">
+                              <div class="col-md-6 row">
+                                <span class="overview-title"><b>Pushed To Slack</b></span>
+                              </div>
+                              <div class="col-md-6 row">
+                                <input type="checkbox" class="checkbox" disabled [checked]="selectedWorkLog.fields.push_to_slack"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12" style="margin-top:15px;">
+                          <div class="col-md-12 row">
+                            <div class="col-md-12">
+                              <span class="overview-title"><b>Created On</b></span>
+                            </div>
+                            <div class="col-md-12">
+                              <input style="width:40%;" class="form-control" disabled [value]="selectedWorkLog.fields.created_on"/>
                             </div>
                           </div>
                         </div>

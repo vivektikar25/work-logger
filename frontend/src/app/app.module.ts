@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToasterModule } from 'angular2-toaster';
 import { MultiselectModule } from 'ngx-multiselect';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,6 +22,7 @@ import { JiraDataService } from './core/jira/jira-data.service';
 import { WorkLogService } from './core/work-log/work-log.service';
 import { WorkLogDataService } from './core/work-log/work-log-data.service';
 import { WorklogBoardComponent } from './worklog-board/worklog-board.component';
+import { StoreCredentialsComponent } from './store-credentials/store-credentials.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { WorklogBoardComponent } from './worklog-board/worklog-board.component';
     LoginComponent,
     SignUpComponent,
     DashboardComponent,
-    WorklogBoardComponent
+    WorklogBoardComponent,
+    StoreCredentialsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { WorklogBoardComponent } from './worklog-board/worklog-board.component';
     ToasterModule,
     MaterialModule,
     AppRoutingModule,
-    MultiselectModule.forRoot()
+    MultiselectModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     LoginSignupService,

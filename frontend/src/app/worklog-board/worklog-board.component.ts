@@ -7,6 +7,8 @@ import { WorkLogService } from './../core/work-log/work-log.service';
   styleUrls: ['./worklog-board.component.css']
 })
 export class WorklogBoardComponent implements OnInit {
+  workLogs;
+  selectedWorkLog;
 
   constructor(
     private workLogService: WorkLogService
@@ -19,12 +21,17 @@ export class WorklogBoardComponent implements OnInit {
   getUsersWorkLogs = () => {
     this.workLogService.getUsersWorkLogs().subscribe(
       data => {
-        console.log(data);
+        this.workLogs = data;
+        this.selectedWorkLog = data[0];
       },
       err => {
 
       }
     )
+  }
+
+  getWorkLogDetails = (workLog) => {
+    this.selectedWorkLog = workLog;
   }
 
 }
