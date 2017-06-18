@@ -14,7 +14,31 @@ export class WorkLogDataService {
   }
 
   getUsersWorkLogs = () => {
-    return this.http.get("save_work_log?date=2017-06-04")
+    const currentDate = this.getCurrentDate();
+    return this.http.get(`save_work_log?date=${currentDate}`)
                     .map(data => data.json());
+  } 
+
+  pushToSlack = (payload) => {
+    return this.http.post("slack_log_work", payload)
+                    .map(data => data.json());
+  }
+
+  pushToJira = (payload) => {
+    return this.http.post("jira_log_work", payload)
+                    .map(data => data.json());
+  }
+
+  getCurrentDate = () => {
+    let date = new Date(Date()),
+        month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate(),
+        year = date.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+    
   }  
 }

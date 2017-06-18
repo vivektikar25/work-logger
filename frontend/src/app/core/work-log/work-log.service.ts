@@ -15,4 +15,35 @@ export class WorkLogService {
   getUsersWorkLogs = () => {
     return this.workLogDataService.getUsersWorkLogs();
   }
+
+  modifyWorkLogList = (workLogs) => {
+    let modifiedWorkLogs = workLogs.map(workLog => {
+      workLog.fields.updateSlack = false;
+      workLog.fields.updateJira = false;
+      return workLog;
+    });
+    return modifiedWorkLogs;
+  }
+
+  getSlacksSelectedWorkLogIds = (workLogs) => {
+    
+    const workLogIdList =  workLogs.filter( workLog => workLog.fields.updateSlack);
+    const mappedWorkLogIdList =  workLogIdList.map( workLog => workLog.pk);
+    return mappedWorkLogIdList; 
+  }
+
+  pushToSlack = (payload) => {
+    return this.workLogDataService.pushToSlack(payload);
+  };
+
+  getJirasSelectedWorkLogIds = (workLogs) => {
+    
+    const workLogIdList =  workLogs.filter( workLog => workLog.fields.updateJira);
+    const mappedWorkLogIdList =  workLogIdList.map( workLog => workLog.pk);
+    return mappedWorkLogIdList; 
+  }
+
+  pushToJira = (payload) => {
+    return this.workLogDataService.pushToJira(payload);
+  };
 }

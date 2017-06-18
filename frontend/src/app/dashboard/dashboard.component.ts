@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   selectedTicket = {};
   comment: string;
   timespent: string;
+  ticketNumber: string = "";
 
   constructor(
     private jiraService: JiraService,
@@ -27,7 +28,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    for(let i=1; i<= 10; i++){
+    for(let i=1; i<= 100; i++){
       this.numberOfTickets.push(i);
     }
     this.projects = ["SMP", "SR", "OHP"];
@@ -35,15 +36,15 @@ export class DashboardComponent implements OnInit {
   }
 
   getJiraTickets = () => {
-    console.log("selectedProjects are", typeof(this.selectedProjects));
+
     const payload = {
       "assignee": this.assignee,
       "project": this.selectedProjects,
-      "max_ticket_limit": Number(this.maxTickets)
+      "max_ticket_limit": Number(this.maxTickets),
+      "ticket_number": this.ticketNumber
     };
     this.jiraService.getJiraTickets(payload).subscribe(
       data => {
-        console.log("data is", data);
         this.tickets = data;
         this.selectedTicket = this.tickets[0];
       },

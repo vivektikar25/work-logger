@@ -14,7 +14,7 @@ class JiraApiView(APIView):
     def post(self, request, payload):
         getDataModel = GetModelData()
         jira_options = {'server': ""}
-        jql_query = 'assignee = {assignee} AND project in {project_list} ORDER BY updated DESC, created DESC'
+
         users_ticket_list = []
 
         params = request.data
@@ -22,23 +22,30 @@ class JiraApiView(APIView):
         project_list = params.get("project")
         assignee = params.get("assignee")
         max_ticket_limit = params.get("max_ticket_limit")
+        ticket_number = params.get("ticket_number")
 
         user_id = payload["user_id"]
         jira_credentilas = getDataModel.getJiraCredentials(user_id)
-
         authed_jira = JIRA(jira_options, basic_auth=(jira_credentilas["users_jira_login"], jira_credentilas["users_jira_password"]))
-        project_tuple_list = [str(x) for x in project_list]
-        project_tuple_list = "(" + ",".join(str(item) for item in project_tuple_list) + ")"
-        jql_query = jql_query.replace("{assignee}", assignee)
-        jql_query = jql_query.replace("{project_list}", project_tuple_list)
+        if ticket_number == '':
+            jql_query = 'assignee = {assignee} AND project in {project_list} ORDER BY updated DESC, created DESC'
+            project_tuple_list = [str(x) for x in project_list]
+            project_tuple_list = "(" + ",".join(str(item) for item in project_tuple_list) + ")"
+            jql_query = jql_query.replace("{assignee}", assignee)
+            jql_query = jql_query.replace("{project_list}", project_tuple_list)
+            users_tickets = authed_jira.search_issues(jql_query, maxResults=max_ticket_limit)
+            for ticket in users_tickets:
+                ticket_detail = {}
+                ticket_detail_object = authed_jira.issue(str(ticket))
+                ticket_detail["ticket_number"] = str(ticket)
+                ticket_detail["summary"] = ticket_detail_object.fields.summary
+                users_ticket_list.append(ticket_detail)
 
-        users_tickets = authed_jira.search_issues(jql_query, maxResults=max_ticket_limit)
-
-        for ticket in users_tickets:
+        else:
+            ticket_detail_object = authed_jira.issue(ticket_number)
             ticket_detail = {}
-            ticket_detail_object = authed_jira.issue(str(ticket))
-            ticket_detail["ticket_number"] = str(ticket)
-            ticket_detail["summary"]= ticket_detail_object.fields.summary
+            ticket_detail["ticket_number"] = str(ticket_number)
+            ticket_detail["summary"] = ticket_detail_object.fields.summary
             users_ticket_list.append(ticket_detail)
 
         return Response(users_ticket_list)
@@ -72,7 +79,8 @@ class SlackPushWorkLog(APIView):
         slack_credentials = getDataModel.getSlackCredentials(payload["user_id"])
         slack_token = slack_credentials["slack_token"]
         filtered_work_log_ids = getDataModel.filter_work_log_byUser(work_log_ids, user)
-        response = getDataModel.slack_log_work(slack_token, payload["user_id"], filtered_work_log_ids)
+        user = getDataModel.getUserById(payload)
+        response = getDataModel.slack_log_work(slack_token, payload["user_id"], filtered_work_log_ids, user)
         if response:
             for id in filtered_work_log_ids:
                 getDataModel.update_work_log_status(id, 'slack')
@@ -106,6 +114,7 @@ class LogWorkApiView(APIView):
         params = request.GET
         date = params.get("date")
         user_id = payload['user_id']
+        print date
         work_logs = getDataModel.get_users_work_logs(user_id)
         datewise_work_logs = getDataModel.filter_worklog_by_date(work_logs, date)
         data = serializers.serialize('json', datewise_work_logs)

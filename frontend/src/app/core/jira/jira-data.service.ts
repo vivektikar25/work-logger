@@ -7,6 +7,7 @@ export class JiraDataService {
   constructor(
     private http: HttpInterceptorService
   ) { }
+  
   getJiraTickets = (payload) => {
     return this.http.post("get_tickets", payload)
                     .map(data => data.json());

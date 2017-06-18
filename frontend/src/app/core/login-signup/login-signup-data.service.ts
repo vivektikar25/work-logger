@@ -17,4 +17,9 @@ export class LoginSignupDataService {
     return this.http.post("login", payload)
                     .map(data => data.json());
   }
+
+  saveCredentials = (payload) => {
+    return this.http.post("save_credentials", payload)
+                    .map(data => data.json());
+  }
 } 

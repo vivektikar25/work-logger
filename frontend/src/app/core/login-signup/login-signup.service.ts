@@ -16,4 +16,8 @@ export class LoginSignupService {
   login = (payload) => {
     return this.loginSignupDataService.login(payload);
   }
+
+  saveCredentials = (payload) => {
+    return this.loginSignupDataService.saveCredentials(payload);
+  }
 }

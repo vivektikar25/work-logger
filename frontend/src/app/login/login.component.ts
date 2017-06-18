@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginSignupService } from './../core/login-signup/login-signup.service';
 import { ToasterServiceService } from './../core/api/toaster-service.service'; 
 
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginSignupService: LoginSignupService,
-    private toasterService: ToasterServiceService
+    private toasterService: ToasterServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
       data => {
         if(data["status"]){
           localStorage.setItem("authToken", data["token"]);
+          this.router.navigate(['/dashboard']);
         }else{
           this.toasterService.showToaster("warning", "Login", data["message"]);
         }

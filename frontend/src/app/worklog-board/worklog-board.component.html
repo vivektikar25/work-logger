@@ -7,6 +7,8 @@
                         <md-card *ngFor="let workLog of workLogs" (click)="getWorkLogDetails(workLog)" class="item-list">
                             <h4 md-line>
                                 <span [class.highlight-title]="1">{{workLog.fields.jira_ticket}}</span>
+                                <span *ngIf="!workLog.fields.push_to_slack">Slack: <input type="checkbox" [(ngModel)]="workLog.fields.updateSlack"/></span>
+                                <span *ngIf="!workLog.fields.push_to_jira">Jira: <input type="checkbox" [(ngModel)]="workLog.fields.updateJira"/></span>
                             </h4>
                         </md-card>
                     </div>
@@ -67,8 +69,11 @@
                         </div>
                         <div class="col-md-12">
                           <div class="col-md-12 row">
-                            <div class="col-md-12" style="margin-top:10px;">
-                              <button class="btn btn-primary" (click)="addWorkLog()">Add Work Log</button>
+                            <div class="col-md-3" style="margin-top:10px;">
+                              <button class="btn btn-primary" (click)="addWorkLogSlack()">Push To Slack</button>
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px;">
+                              <button class="btn btn-primary" (click)="addWorkLogJira()">Push To Jira</button>
                             </div>
                           </div>
                         </div>

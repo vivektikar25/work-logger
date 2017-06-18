@@ -43,9 +43,11 @@ class GetModelData():
         response = requests.request("POST", url, data=json.dumps(payload), headers=headers)
         return response
 
-    def slack_log_work(self, slack_token, user_id, work_log_ids):
+    def slack_log_work(self, slack_token, user_id, work_log_ids, user):
         sc = SlackClient(slack_token)
-        comment_list = ""
+        user_name = user.email.split('@')[0]
+        team = "\n #"+user.department[:3].lower() + "team"
+        comment_list = team+"\n"+user_name
         print work_log_ids
         for id in work_log_ids:
             if id:
@@ -225,8 +227,8 @@ class GetModelData():
         users_work_logs = work_logs.filter(user_id = user)
         filtered_work_log_ids = []
         for work_log in users_work_logs:
-            print work_log.id
-            filtered_work_log_ids.append(work_log.id)
+            if work_log.id in work_log_ids:
+                filtered_work_log_ids.append(work_log.id)
         return filtered_work_log_ids
 
 def authorize_user(f):
